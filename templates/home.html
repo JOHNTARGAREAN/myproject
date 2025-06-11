@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Домой{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <p class="container">Привет {{ user.username }}! тебе {{ user.age }} лет.</p>
+        <p class="container">
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger">Выйти</button>
+            </form>
+        </p>
+{% else %}
+    <p class="container">Вы не вошли в систему</p>
+    <a class="container" href="{% url 'login' %}">Войти</a> 
+    <a class="container" href="{% url 'signup' %}">Регистрация</a>
+{% endif %}
+{% endblock content %}
